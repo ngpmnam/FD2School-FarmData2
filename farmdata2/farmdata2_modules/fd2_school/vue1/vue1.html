@@ -17,14 +17,17 @@
       <label for="endDate">End: </label>
       <input type="date" id="endDate" :min="start" max="2022-01-01" v-model="end">
       <br>
+
+
       <label for="cropDropdown">Crop: </label>
     <select id="cropDropDown" name="Crop" v-model="crop">
-      <option v-for = "item in crops" :value = "item" :key = "item">{{item}}</option>
+      <option v-for = "item in crops">{{item}}</option>
     </select>
+
 
     <label for="fieldDropDown">Area: </label>
     <select id="fieldDropDown" name="Field" v-model="field">
-      <option v-for="area in areas" :value="area" :key="area">{{area}}</option>
+      <option v-for="area in areas">{{area}}</option>
     </select>
     </div> 
     
@@ -34,7 +37,7 @@
     <hr />
 
     <div>
-      <h1>{{ header == '' ? "Mock Harvest Report" : header }}</h1>
+      <h1>{{ header ? header : "Mock Harvest Report" }}</h1>
     </div>
   
     
@@ -50,7 +53,7 @@
       <li><strong>End:</strong>{{end}}</li>
       <li><strong>Crop:</strong>{{crop}}</li>
     </ul>
-  </div>
+  
 <table border=1>
   <tr>
     <th>Date</th>
@@ -59,23 +62,13 @@
     <th>Yield</th>
     <th>Units</th>
   </tr>
-  <tr>
-    <td>09/05/2024</td>
-    <td>Chuau-1</td>
-    <td>Kale</td>
-    <td>10</td>
-    <td>Bunches</td>
-  </tr>
-  <tr>
-    <td>09/05/2024</td>
-    <td>SQ7</td>
-    <td>Kale</td>
-    <td>7</td>
-    <td>Bunches</td>
+ 
+  <tr v-for="log in logs">
+    <td v-for="value in log" :key="value">{{value}}</td>
   </tr>
 </table>
     
-
+</div>
 <script>
   var mySample = new Vue({
     el: "#my-sample",
@@ -89,11 +82,15 @@
         "Broccoli",
         "Peas"
       ],
-      field : "",
+      field : "All",
       areas : [
         "All",
         "Chuau-1",
         "SQ7",
+      ],
+      logs:[
+        {date: "2020-09-01", area: "Chuau-1", cr: "Kale", yield: 4, units: "Bunches"},
+        {date: "2021-02-02", area: "All", cr: "Broccoli", yield: 14, units: "Bunches"},
       ]
 
 
