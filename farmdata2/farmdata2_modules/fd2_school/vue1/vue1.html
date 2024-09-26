@@ -3,7 +3,14 @@
   <h1>Harvest Report </h1>
     <p> This page is a <i>mockup</i> of a simplified harvest report. </p>
     <label for="textField">Title: </label>
-    <input type="text" id="textField" name="comment" value="My Sample Harvest Report" />
+    <div id="my-sample" v-cloak>
+      <div>
+        <input type="text" v-model="header"/>
+  
+      </div>
+    
+    
+    
     <br>
     <label for="startDate">Start: </label>
     <input type="date" id="startDate" min="2014-01-01" max="2022-01-01" value="2020-05-05">
@@ -25,7 +32,21 @@
     <br>
     <input type="submit" value="Generate Report" />
     <hr />
-  <h1>My Sample Harvest Report </h1>
+
+    <div>
+      <h1>{{ header }}</h1>
+    </div>
+  </div>
+    
+    <script>
+      var mySample = new Vue({
+        el: "#my-sample",
+        data: {
+          header: "My Sample Harvest Report",
+        },
+      });
+    </script>
+    
     <p> Details </p>
     <ul>
       <li><strong>Farm:</strong>Sample Farm</li>
