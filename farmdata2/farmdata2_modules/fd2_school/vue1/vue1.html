@@ -64,11 +64,17 @@
   </tr>
  
   <tr v-for="log in logs">
-    <td v-for="value in log" :key="value">{{value}}</td>
+    <td>{{log.date}}</td>
+    <td >{{log.area}}</td>
+    <td >{{log.cr}}</td>
+    <td>{{log.yield}}</td>
+    <td>{{log.units}}</td>
   </tr>
 </table>
     
 </div>
+
+
 <script>
   var mySample = new Vue({
     el: "#my-sample",
@@ -91,9 +97,7 @@
       logs:[
         {date: "2020-09-01", area: "Chuau-1", cr: "Kale", yield: 4, units: "Bunches"},
         {date: "2021-02-02", area: "All", cr: "Broccoli", yield: 14, units: "Bunches"},
-      ]
-
-
+      ],
     },
   });
 </script>
