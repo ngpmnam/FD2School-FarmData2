@@ -19,18 +19,16 @@
       <br>
       <label for="cropDropdown">Crop: </label>
     <select id="cropDropDown" name="Crop" v-model="crop">
-      <option selected>Kale</option>
-      <option>Broccoli</option>
-      <option>Peas</option>
+      <option v-for = "item in crops" :value = "item" :key = "item">{{item}}</option>
+    </select>
+
+    <label for="fieldDropDown">Area: </label>
+    <select id="fieldDropDown" name="Field" v-model="field">
+      <option v-for="area in areas" :value="area" :key="area">{{area}}</option>
     </select>
     </div> 
     
-    <label for="fieldDropDown">Area: </label>
-    <select id="fieldDropDown" name="Field">
-      <option selected>All</option>
-      <option>Chuau-1</option>
-      <option>SQ7</option>
-    </select>
+    
     <br>
     <input type="submit" value="Generate Report" />
     <hr />
@@ -85,7 +83,20 @@
       header: "My Sample Harvest Report",
       start: "2020-05-05",
       end: "2021-02-02",
-      crop:"Kale"
+      crop:'Kale',
+      crops:[
+        "Kale",
+        "Broccoli",
+        "Peas"
+      ],
+      field : "",
+      areas : [
+        "All",
+        "Chuau-1",
+        "SQ7",
+      ]
+
+
     },
   });
 </script>
