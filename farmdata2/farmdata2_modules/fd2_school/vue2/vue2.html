@@ -34,8 +34,7 @@
     
     <br>
     <div class="generate-report">
-      <button class="btn btn-primary" @click="logs.push({date: '2018-05-01', area: 'Orion-3', 
-      cr: 'Kale', yield: '12', units: 'Bunches'})" >Generate Report</button>
+      <button class="btn btn-primary" @click="generate" >Generate Report</button>
     </div>
 
     <hr />
@@ -100,6 +99,12 @@
       ],
       logs:[],
     },
+    methods:{
+      generate: function(){
+        this.logs.push({date: '2018-05-01', area: 'Orion-3', 
+      cr: 'Kale', yield: '12', units: 'Bunches'});
+      }
+    }
   });
 
   Vue.config.devtools = true;
