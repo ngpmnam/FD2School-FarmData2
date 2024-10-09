@@ -21,13 +21,13 @@
 
       <label for="cropDropdown">Crop: </label>
     <select id="cropDropDown" name="Crop" v-model="crop">
-      <option v-for = "item in crops">{{item}}</option>
+      <option v-for = "item in cropNames">{{item}}</option>
     </select>
 
 
     <label for="fieldDropDown">Area: </label>
     <select id="fieldDropDown" name="Field" v-model="field">
-      <option v-for="area in areas">{{area}}</option>
+      <option v-for="area in areaNames">{{area}}</option>
     </select>
     </div> 
     
@@ -84,31 +84,45 @@
 <script>
   var mySample = new Vue({
     el: "#my-sample",
+    created() {
+      getIDToCropMap()
+	    .then((theMap) => {
+        // Process the map.
+        // Typically it is stored in the Vue data for later use.
+        this.idToCropMap = theMap;
+        console.log("Successfully get the tid Map")
+      })
+      .catch((err) => {
+        // An error occurred during the request, process it here.
+        console.log("Fail to get the tid Map")
+      })
+        // Execution continues here immediately after the request is made.
+        // Note that the Map will not be available until the then() executes.
+
+    },
     data: {
       header: "My Sample Harvest Report",
       start: "2020-05-05",
       end: "2021-02-02",
       crop:'Kale',
-      crops:[
-        "Kale",
-        "Broccoli",
-        "Peas"
-      ],
+      crops:[],
       farm: '',
       user: '',
       language: '',
       field : "All",
-      areas : [
-        "All",
-        "Chuau-1",
-        "SQ7",
-      ],
+      areas : [],
       logs:[],
+      idToCropMap: new Map(),
+      idToAreaMap: new Map(),
+    },
+    computed:{
+      cropNames() {
+        cropVals = this.idToCropMap.values();
+        return cropVals;
+      },
     },
     methods:{
       generate: function(){
-        
-
         axios.get('/farm.json')  // this line sends the request.
         .then((response) => {
             // Block A:
