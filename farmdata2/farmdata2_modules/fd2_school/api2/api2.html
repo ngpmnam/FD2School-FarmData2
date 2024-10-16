@@ -58,7 +58,7 @@
     </ul>
     
     <table border=1>
-      <tr v-if="logs.length > 0">
+      <tr v-if="allPagesArr.length > 0">
         <th>Row</th>
         <th>Date</th>
         <th>Area</th>
@@ -67,7 +67,7 @@
         <th>Units</th>
       </tr>
       
-      <tr v-for="(log,index) in logs">
+      <tr v-for="(log,index) in harvestReportRows">
         <td>{{index + 1}}</td>
         <td>{{log.date}}</td>
         <td >{{log.area}}</td>
@@ -120,6 +120,22 @@
         cropVals = this.idToCropMap.values();
         return cropVals;
       },
+
+      harvestReportRows() {
+        let tableRows = []
+        for(let log of this.allPagesArr) {
+          let tableRow = {
+            date: log.timestamp,
+            area: log.area[0].name,
+            yield: log.quantity[0].value,
+            units: log.quantity[0].unit.name,
+            cr: this.idToCropMap.get(log.data.crop_tid),
+          }
+          tableRows.push(tableRow)
+        }
+        return tableRows
+      },
+
     },
     methods:{
       generate: function(){
