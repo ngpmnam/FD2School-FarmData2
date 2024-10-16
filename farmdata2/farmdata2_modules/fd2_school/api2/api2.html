@@ -67,7 +67,7 @@
         <th>Units</th>
       </tr>
       
-      <tr v-for="(log,index) in harvestReportRows">
+      <tr v-for="(log,index) in harvestReportRows" >
         <td>{{index + 1}}</td>
         <td>{{log.date}}</td>
         <td >{{log.area}}</td>
@@ -131,7 +131,9 @@
             units: log.quantity[0].unit.name,
             cr: this.idToCropMap.get(log.data.crop_tid),
           }
-          tableRows.push(tableRow)
+            if(tableRow.cr == this.crop) {
+              tableRows.push(tableRow)
+            }
         }
         return tableRows
       },
