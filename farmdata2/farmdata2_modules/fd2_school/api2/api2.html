@@ -154,12 +154,11 @@
           console.log(startTimestamp, endTimestamp);
           let request = "/log.json?type=farm_harvest&timestamp[ge]="+ startTimestamp + "&timestamp[le]=" + endTimestamp;
           console.log(request);
-          getAllPages(request)
-          .then((result) => {
+          getAllPages(request, this.allPagesArr)
+          .then(() => {
               // All of the requested records have now been added to result.
               // Additional processing can happen here if necessary,
               // or then may be omitted.
-              this.allPagesArr = result;
               console.log("successful")
           })
           .catch((err) => {
