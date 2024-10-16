@@ -125,7 +125,7 @@
         let tableRows = []
         for(let log of this.allPagesArr) {
           let tableRow = {
-            date: log.timestamp,
+            date: dayjs.unix(log.timestamp).format('MM/DD/YYYY'),
             area: log.area[0].name,
             yield: log.quantity[0].value,
             units: log.quantity[0].unit.name,
@@ -144,8 +144,6 @@
             // Block A:
             // Code here executes when the response is received.
             // response is an Object created from the “Response Body” JSON.
-            console.log("Got Response")
-            console.log(response)
             this.farm = response.data.name;
             this.user = response.data.user.name;
             this.language = response.data.user.language;  
@@ -155,22 +153,15 @@
             // Block B: 
             // Code here executes if an error occurs processing the request.
             // error is an Object describing the error that occurred.
-            console.log("Error Occurred")
-            console.log(error)
 
           })
           // Block C: 
             // Code here runs immediately after the request is sent,
             // which will be before the code in then() or catch(),
             // and before the response is received.
-          this.logs.push({date: "2018-05-01", area: "Orion-3", 
-          cr: "Kale", yield: "12", units: "Bunches"});
           let startTimestamp = dayjs(this.start).unix();
           let endTimestamp = dayjs(this.end).unix();
-          console.log(startTimestamp, endTimestamp);
-          let request = "/log.json?type=farm_harvest&timestamp[ge]="+ startTimestamp + "&timestamp[le]=" + endTimestamp;
-          console.log(request);
-          getAllPages(request, this.allPagesArr)
+          let request = "/log.json?type=farm_harvest&timestamp[ge]="+ startTimestamp + "&timestamp[le]=" + endTimestamp;          getAllPages(request, this.allPagesArr)
           .then(() => {
               // All of the requested records have now been added to result.
               // Additional processing can happen here if necessary,
