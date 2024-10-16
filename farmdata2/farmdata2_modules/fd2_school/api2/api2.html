@@ -113,6 +113,7 @@
       areas : ["Chuau-1", "All", "SQ7"],
       logs:[],
       idToCropMap: new Map(),
+      allPagesArr: [],
     },
     computed:{
       cropNames() {
@@ -148,9 +149,28 @@
             // and before the response is received.
           this.logs.push({date: "2018-05-01", area: "Orion-3", 
           cr: "Kale", yield: "12", units: "Bunches"});
-          
+          let startTimestamp = dayjs(this.start).unix();
+          let endTimestamp = dayjs(this.end).unix();
+          console.log(startTimestamp, endTimestamp);
+          let request = "/log.json?type=farm_harvest&timestamp[ge]="+ startTimestamp + "&timestamp[le]=" + endTimestamp;
+          console.log(request);
+          getAllPages(request)
+          .then((result) => {
+              // All of the requested records have now been added to result.
+              // Additional processing can happen here if necessary,
+              // or then may be omitted.
+              this.allPagesArr = result;
+              console.log("successful")
+          })
+          .catch((err) => {
+              // An error occurred during the requests, process it here.
+              console.log("Fail")
+          })
+          // Execution continues here immediately after the request is made.
+          // Result will not yet contain records but will be filled as responses are received.
+          // The result will contain all records when then() is invoked.
+        }
       },
-    }
   });
 
   Vue.config.devtools = true;
