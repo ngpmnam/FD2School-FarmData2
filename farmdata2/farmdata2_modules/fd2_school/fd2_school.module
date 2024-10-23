@@ -105,6 +105,15 @@ $items['farm/fd2-school/api2'] = array(
         'access arguments' => array('view fd2 school'),
         'weight' => 610,
     );
+
+$items['farm/fd2-school/e2e'] = array(
+        'title' => 'E2E',
+        'type' => MENU_LOCAL_TASK,
+        'page callback' => 'fd2_school_view',
+        'page arguments' => array('e2e'),
+        'access arguments' => array('view fd2 school'),
+        'weight' => 620,
+    );
   return $items;
 };
 
