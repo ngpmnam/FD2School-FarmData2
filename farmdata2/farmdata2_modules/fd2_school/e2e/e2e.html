@@ -34,13 +34,13 @@
     
     <br>
     <div class="generate-report">
-      <button class="btn btn-primary" @click="generate">Generate Report</button>
+      <button data-cy="generate-report-button" class="btn btn-primary" @click="generate">Generate Report</button>
     </div>
 
     <hr />
 
     <div>
-      <h1>{{ header ? header : "Mock Harvest Report" }}</h1>
+      <h1 data-cy="report-header">{{ header ? header : "My Sample Harvest Report"}}</h1>
     </div>
   
     
@@ -101,7 +101,7 @@
 
     },
     data: {
-      header: "My Sample Harvest Report",
+      header: '',
       start: "2020-05-05",
       end: "2020-05-15",
       crop:'Kale',
